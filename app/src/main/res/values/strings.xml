@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">To Do App</string>
+    <string name="enter_details">Enter Details</string>
+    <string name="enter_task">Enter Task</string>
+    <string name="priority">Priority</string>
+    <string name="save">Save</string>
+</resources>
