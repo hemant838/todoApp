@@ -16,23 +16,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val add : Button= findViewById(R.id.add)
+
+        val add: Button = findViewById(R.id.add)
         add.setOnClickListener {
-           Toast.makeText(this,"happening",Toast.LENGTH_LONG).show()
-            val intent = Intent(this,CreateCard::class.java)
+            val intent = Intent(this, CreateKard::class.java)
             startActivity(intent)
             finish()
         }
 
-        val deleteAll : Button = findViewById(R.id.deleteAll)
+        val deleteAll: Button = findViewById(R.id.deleteAll)
         deleteAll.setOnClickListener {
             DataObject.deleteAll()
+            setRecycler()
         }
+        setRecycler()
+    }
 
-
+    fun setRecycler() {
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.adapter = Adapter(DataObject.getAlldata())
         recyclerView.layoutManager = LinearLayoutManager(this)
-
     }
+
 }

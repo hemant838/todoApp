@@ -19,8 +19,11 @@ class UpdateCard : AppCompatActivity() {
             val title = DataObject.getData(pos).title
             val priority = DataObject.getData(pos).priority
 
-            findViewById<EditText>(R.id.create_title).setText(title)
-            findViewById<EditText>(R.id.create_priority).setText(priority)
+            val create_title = findViewById<EditText>(R.id.create_title)
+            val create_priority = findViewById<EditText>(R.id.create_priority)
+
+            create_title.setText(title)
+            create_priority.setText(priority)
 
             findViewById<Button>(R.id.delete_btn).setOnClickListener {
                 DataObject.deleteData(pos)
@@ -28,7 +31,7 @@ class UpdateCard : AppCompatActivity() {
             }
 
             findViewById<Button>(R.id.update_btn).setOnClickListener {
-                DataObject.updateData(pos, title, priority)
+                DataObject.updateData(pos,create_title.text.toString(), create_priority.text.toString())
                 myIntent()
             }
         }
