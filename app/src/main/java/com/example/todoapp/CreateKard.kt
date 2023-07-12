@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 class CreateKard : AppCompatActivity() {
 
+    private lateinit var database : MyDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_kard)
@@ -19,7 +21,7 @@ class CreateKard : AppCompatActivity() {
         val createPriority = findViewById<EditText>(R.id.create_priority)
         val savebtn = findViewById<Button>(R.id.save_btn)
 
-        var database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do")
+        database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do")
             .allowMainThreadQueries().build()
 
         savebtn.setOnClickListener {
@@ -31,7 +33,7 @@ class CreateKard : AppCompatActivity() {
                 DataObject.setData(title, priority)
 
                 GlobalScope.launch {
-                    database.dao().insertTask(Entity(0,title,priority))
+                    database.dao().insertTask(Entity(0,title, priority))
                 }
 
                 val intent = Intent(this, MainActivity::class.java)

@@ -11,13 +11,13 @@ import androidx.room.Update
 interface DAO {
 
     @Insert
-    suspend fun insertTask(entity: com.example.todoapp.Entity)
+    suspend fun insertTask(entity:com.example.todoapp.Entity)
 
     @Update
-    suspend fun updateTask(entity: com.example.todoapp.Entity)
+    suspend fun updateTask(entity:com.example.todoapp.Entity)
 
     @Delete
-    suspend fun deleteTask(entity: com.example.todoapp.Entity)
+    suspend fun deleteTask(entity:com.example.todoapp.Entity)
 
     @Query("Delete from to_do")
     suspend fun deleteAll()
