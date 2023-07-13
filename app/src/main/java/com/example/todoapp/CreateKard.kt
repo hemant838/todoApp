@@ -12,18 +12,18 @@ import kotlinx.coroutines.launch
 class CreateKard : AppCompatActivity() {
 
     private lateinit var database: MyDatabase
-    private val createTitle = findViewById<EditText>(R.id.create_title)
-    private val createPriority = findViewById<EditText>(R.id.create_priority)
-    private val savebtn = findViewById<Button>(R.id.save_btn)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_kard)
 
-
-
         database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do")
             .allowMainThreadQueries().build()
+
+        val createTitle = findViewById<EditText>(R.id.create_title)
+        val createPriority = findViewById<EditText>(R.id.create_priority)
+        val savebtn = findViewById<Button>(R.id.save_btn)
 
         savebtn.setOnClickListener {
             if (createTitle.text.toString().trim { it <= ' ' }.isNotEmpty()

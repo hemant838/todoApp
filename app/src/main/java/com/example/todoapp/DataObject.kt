@@ -1,9 +1,8 @@
 package com.example.todoapp
 
-import java.util.PriorityQueue
 
 object DataObject {
-    var listdata = mutableListOf<CardInfo>()
+    private var listdata = mutableListOf<CardInfo>()
 
     fun setData(title: String, priority: String) {
         listdata.add(CardInfo(title, priority))
