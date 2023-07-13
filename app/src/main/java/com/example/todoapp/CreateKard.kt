@@ -1,7 +1,6 @@
 package com.example.todoapp
 
 import android.content.Intent
-import android.icu.text.CaseMap.Title
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -12,17 +11,19 @@ import kotlinx.coroutines.launch
 
 class CreateKard : AppCompatActivity() {
 
-    lateinit var database : MyDatabase
+    private lateinit var database: MyDatabase
+    private val createTitle = findViewById<EditText>(R.id.create_title)
+    private val createPriority = findViewById<EditText>(R.id.create_priority)
+    private val savebtn = findViewById<Button>(R.id.save_btn)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_kard)
 
-        val createTitle = findViewById<EditText>(R.id.create_title)
-        val createPriority = findViewById<EditText>(R.id.create_priority)
-        val savebtn = findViewById<Button>(R.id.save_btn)
 
-        database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do").allowMainThreadQueries().build()
+
+        database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do")
+            .allowMainThreadQueries().build()
 
         savebtn.setOnClickListener {
             if (createTitle.text.toString().trim { it <= ' ' }.isNotEmpty()
@@ -33,7 +34,7 @@ class CreateKard : AppCompatActivity() {
                 DataObject.setData(title, priority)
 
                 GlobalScope.launch {
-                    database.dao().insertTask(Entity(0,title, priority))
+                    database.dao().insertTask(Entity(0, title, priority))
                 }
 
                 val intent = Intent(this, MainActivity::class.java)
