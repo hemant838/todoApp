@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class CreateKard : AppCompatActivity() {
 
-    private lateinit var database : MyDatabase
+    lateinit var database : MyDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +21,7 @@ class CreateKard : AppCompatActivity() {
         val createPriority = findViewById<EditText>(R.id.create_priority)
         val savebtn = findViewById<Button>(R.id.save_btn)
 
-        database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do")
-            .allowMainThreadQueries().build()
+        database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do").allowMainThreadQueries().build()
 
         savebtn.setOnClickListener {
             if (createTitle.text.toString().trim { it <= ' ' }.isNotEmpty()
