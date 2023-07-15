@@ -5,21 +5,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class CreateKard : AppCompatActivity() {
-
-    private lateinit var database: MyDatabase
-
+    private lateinit var dataObject: DataObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_kard)
 
-        database = Room.databaseBuilder(applicationContext, MyDatabase::class.java, "to_do")
-            .allowMainThreadQueries().build()
+        dataObject = DataObject(this)
 
         val createTitle = findViewById<EditText>(R.id.create_title)
         val createPriority = findViewById<EditText>(R.id.create_priority)
@@ -31,11 +25,7 @@ class CreateKard : AppCompatActivity() {
             ) {
                 val title = createTitle.text.toString()
                 val priority = createPriority.text.toString()
-                DataObject.setData(title, priority)
-
-                GlobalScope.launch {
-                    database.dao().insertTask(Entity(0, title, priority))
-                }
+                dataObject.setData(title, priority)
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

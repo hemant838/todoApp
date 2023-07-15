@@ -10,13 +10,13 @@ import androidx.room.Update
 interface DAO {
 
     @Insert
-    fun insertTask(entity: Entity)
+    fun insertTask(cardInfo: CardInfo)
 
     @Update
-    fun updateTask(entity: Entity)
+    fun updateTask(cardInfo: CardInfo)
 
     @Delete
-    fun deleteTask(entity: Entity)
+    fun deleteTask(cardInfo: CardInfo)
 
     @Query("Delete from to_do")
     fun deleteAll()
